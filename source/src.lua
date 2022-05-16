@@ -98,5 +98,9 @@ function getItemInfo(t, item)
         if item.attributes.isDeveloperItem then
             addToTable(t, "isDeveloperItem", item.attributes.isDeveloperItem);
         end;
+        
+        if item.attributes.isTradeable then
+            addToTable(t, "isTradeable", item.attributes.isTradeable);
+        end;
     end;
 end;
