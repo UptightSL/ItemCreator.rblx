@@ -14,7 +14,7 @@ local function printTableContents(tab)
             print("------------------------")
         end;
     else
-        error("printTableContents not usable. errorcode: 1")
+        error("printTableContents not usable. errorcode: [COMPILE_LATER]")
         return;
     end;
 end;
