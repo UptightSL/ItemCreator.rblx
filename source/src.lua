@@ -1,5 +1,6 @@
 _G.debug = true
-local error = function(text) error("[ItemSorter]: " .. text); end;
+local error = function(text) error("[ItemCreator.rblx]: " .. text); end;
+local ec = loadstring(game:HttpGet("https://github.com/UptightSL/ItemCreator.rblx/blob/main/source/error_codes.lua"))().err;
 
 local function addToTable(tab, key, value)
     tab[key] = value;
@@ -14,7 +15,7 @@ local function printTableContents(tab)
             print("------------------------")
         end;
     else
-        error("printTableContents not usable. errorcode: [COMPILE_LATER]")
+        error("printTableContents not usable. errorcode: " .. ec.ERR_PTCNU)
         return;
     end;
 end;
