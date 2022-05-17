@@ -1,7 +1,7 @@
 _G.debug = true
 local error = function(text) error("[ItemCreator.rblx]: " .. text); end;
 local HttpService = game:GetService("HttpService");
-local ec = loadstring(HttpService:GetAsync("https://github.com/UptightSL/ItemCreator.rblx/blob/main/source/error_codes.lua"))().err;
+local ec = loadstring(HttpService:GetAsync("https://github.com/UptightSL/ItemCreator.rblx/blob/main/source/error_codes.lua"))().codes;
 
 local function addToTable(tab, key, value)
     tab[key] = value;
@@ -16,22 +16,31 @@ local function printTableContents(tab)
             print("------------------------")
         end;
     else
-        error("printTableContents not usable. errorcode: " .. ec.ERR_PTCNU)
+        error()
         return;
     end;
 end;
 
 function getItemInfo(t, item)
-    if item.name then
+    if (item.name and type(item.name) == "string") then
         addToTable(t, "name", item.name);
+    elseif (item.name and type(item.name) ~= "string") then
+        error(ec.itemNameNotString);
+        return;
     end;
 
-    if item.itemtype then
+    if (item.itemtype and type(item.itemtype) == "string") then
         addToTable(t, "itemtype", item.itemtype);
+    elseif (item.itemtype and type(item.itemtype) ~= "string") then
+        error(ec.itemTypeNotString);
+        return;
     end;
 
-    if item.material then
+    if (item.material and type(item.material) == "string") then
         addToTable(t, "material", item.material);
+    elseif (item.material and type(item.material) ~= "string") then
+        error(ec.itemMaterialNotString);
+        return;
     end;
 
     if item.damage then
@@ -47,11 +56,8 @@ function getItemInfo(t, item)
             addToTable(t, "max_critical", item.damage.max_critical);
         end;
 
-        if (item.damage.min_critical and item.damage.min_critical > 100) then
+        if item.damage.min_critical then
             addToTable(t, "min_critical", item.damage.min_critical);
-        elseif item.damage.min_critical > 100 then
-            error(ec.ERR_MCSO);
-            return;
         end;
 
         if item.damage.critical_chance then
@@ -73,18 +79,12 @@ function getItemInfo(t, item)
             addToTable(t, "enchant_third", item.enchants.third);
         end;
 
-        if (item.enchants.fourth and _G.debug == true) then
+        if item.enchants.fourth then
             addToTable(t, "enchant_fourth", item.enchants.fourth);
-        elseif (item.enchants.fourth and _G.debug == false) then
-            error("Fourth Enchant Found. Value: " .. item.enchants.fourth);
-            return;
         end;
 
-        if (item.enchants.fifth and _G.debug == true) then
+        if item.enchants.fifth then
             addToTable(t, "enchant_fifth");
-        elseif (item.enchants.fifth and _G.debug == false) then
-            error("Fifth Enchant Found. Value: " .. item.enchants.fifth);
-            return;
         end;
     end;
 
