@@ -1,6 +1,7 @@
 _G.debug = true
 local error = function(text) error("[ItemCreator.rblx]: " .. text); end;
-local ec = loadstring(game:HttpGet("https://github.com/UptightSL/ItemCreator.rblx/blob/main/source/error_codes.lua"))().err;
+local HttpService = game:GetService("HttpService");
+local ec = loadstring(HttpService:GetAsync("https://github.com/UptightSL/ItemCreator.rblx/blob/main/source/error_codes.lua"))().err;
 
 local function addToTable(tab, key, value)
     tab[key] = value;
@@ -49,7 +50,7 @@ function getItemInfo(t, item)
         if (item.damage.min_critical and item.damage.min_critical > 100) then
             addToTable(t, "min_critical", item.damage.min_critical);
         elseif item.damage.min_critical > 100 then
-            error("Min Critical Stack Damaged")
+            error(ec.ERR_MCSO);
             return;
         end;
 
