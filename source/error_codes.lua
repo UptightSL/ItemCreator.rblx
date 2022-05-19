@@ -5,3 +5,9 @@ err = {
     ["ERR_XCSO"] = "0x7fffffffeb40"; --> MaxCriticalStackOverlimit
     ["ERR_ICAL"] = "0x7fffffffeb60"; --> ItemCreatorAlreadyLoaded
 }
+
+codes = {
+    ["failedtoload"] = "ItemCreator.rblx Failed to Load. " .. err.ERR_FTL;
+    ["printTableContentsNotUseable"] = "printTableContents is not useable. " .. err.ERR_PTCNU;
+    ["MinCriticalStackOverlimit"] = "";
+}
